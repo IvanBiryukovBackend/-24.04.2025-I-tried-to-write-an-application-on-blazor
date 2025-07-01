@@ -1,0 +1,122 @@
+﻿@page "/add-cars"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@using HomeWorkAuthPager.Helper
+@inject ICarsRepository MsSqlCarsRepository
+
+<h3>Add New Cars</h3>
+
+<div class="mb-1">
+    <label for="CarBrand" class="form-label">Марка Машины</label>
+    <input type="text" class="form-control" id="CarBrand" @bind="CarBrand" />
+</div>
+<div class="mb-1">
+    <label for="CarModel" class="form-label">Модель машины</label>
+    <input type="text" class="form-control" id="CarModel" @bind="CarModel" />
+</div>
+<div class="mb-1">
+    <label for="Year" class="form-label">Год</label>
+    <input type="text" class="form-control" id="Year" @bind="Year" />
+</div>
+<div class="mb-1">
+    <label for="EnginePower" class="form-label">Мощность л.с (лошадиные силы)</label>
+    <input type="text" class="form-control" id="EnginePower" @bind="EnginePower" />
+</div>
+@* <div class="mb-1">
+    <label for="Image" class="form-label">Картинка</label>
+    <input type="file" class="form-control" id="Image" @bind="Image" />
+</div> *@
+<div class="mb-1">
+    <label for="Generation" class="form-label">Поколение</label>
+    <select @bind="Generation" class="form-control form-control-lg">
+        <option value="">-- Select --</option>
+        @foreach (var generation in Enum.GetValues(typeof(Generation)))
+        {
+            <option value="@generation">@generation</option>
+        }
+    </select>
+</div>
+<div class="mb-1">
+    <label for="Gearboxes" class="form-label">Коробка Передач</label>
+    <select @bind="Gearboxes" class="form-control form-control-lg">
+        <option value="">-- Select --</option>
+        @foreach (var gearboxes in Enum.GetValues(typeof(Gearboxes)))
+        {
+            <option value="@gearboxes">@gearboxes</option>
+        }
+    </select>
+</div>
+<div class="mb-1">
+    <label for="Type" class="form-label">Тип Кузова</label>
+    <select @bind="Type" class="form-control form-control-lg">
+        <option value="">-- Select --</option>
+        @foreach (var type in Enum.GetValues(typeof(Domains.Type)))
+        {
+            <option value="@type">@type</option>
+        }
+    </select>
+</div>
+<div class="mb-1">
+    <label for="BodyType" class="form-label">Количество Мест</label>
+    <select @bind="BodyType" class="form-control form-control-lg">
+        <option value="">-- Select --</option>
+        @foreach (var bodyType in Enum.GetValues(typeof(BodyType)))
+        {
+            <option value="@bodyType">@bodyType</option>
+        }
+    </select>
+</div>
+<div class="mb-1">
+    <label for="Color" class="form-label">Цвет</label>
+    <select @bind="Color" class="form-control form-control-lg">
+        <option value="">-- Select --</option>
+        @foreach (var color in Enum.GetValues(typeof(Domains.Color)))
+        {
+            <option value="@color">@color</option>
+        }
+    </select>
+</div>
+
+<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+<button class="btn btn-primary" @onclick="InsertCar">Save</button>
+
+@code {
+    private string CarBrand;
+    private string CarModel;
+    private int Year;
+    private int EnginePower;
+    // private IFormFile Image;
+    private Generation Generation;
+    private Gearboxes Gearboxes;
+    private Domains.Type Type;
+    private BodyType BodyType;
+    private Domains.Color Color;
+    @inject IWebHostEnvironment webHostEnvironment;
+
+    private async Task InsertCar()
+    {
+        var car = new Car
+        {
+            CarBrand = CarBrand,
+            CarModel = CarModel,
+            Year = Year,
+            EnginePower = EnginePower,
+            Image = "car.png",
+            Generation = Generation,
+            Gearboxes = Gearboxes,
+            Type = Type,
+            BodyType = BodyType,
+            Color = Color
+        };
+
+        await MsSqlCarsRepository.AddCar(car);
+        Navigation.NavigateTo("/cars");
+        StateHasChanged();
+
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/cars");
+    }
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWorkAuthPager", "HomeWorkAuthPager\HomeWorkAuthPager.csproj", "{18677357-BEE0-4A1C-8941-F2B8F849E9A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18677357-BEE0-4A1C-8941-F2B8F849E9A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18677357-BEE0-4A1C-8941-F2B8F849E9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18677357-BEE0-4A1C-8941-F2B8F849E9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18677357-BEE0-4A1C-8941-F2B8F849E9A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97768D02-2319-47CC-AD29-A23B254AD3F7}
+	EndGlobalSection
+EndGlobal

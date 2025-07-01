@@ -1,0 +1,73 @@
+﻿@page "/cars"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject ICarsRepository MsSqlCarsRepository
+<link rel="stylesheet" href="~/cars.css" />
+<h3>Cars Table</h3>
+    <button class="btn btn-primary" @onclick="OpenAddCarModal">Add New Car</button>
+    <br /> 
+    <div class="carssd">
+        @foreach (var car in cars.Skip(page * 3).Take(3))
+        {
+            <div class="card">
+                <h3>@car.CarBrand @car.CarModel @car.Year г.</h3>
+                <div class="positi">
+                    <div>
+                        <p style="width:110px"><strong>Поколение:</strong> @car.Generation</p>
+                        <p><strong>Мощность:</strong> @car.EnginePower л.с.</p>
+                        <p><strong>Коробка передач:</strong> @car.Gearboxes</p>
+                    </div>
+                    <div>
+                        <p><strong>Тип кузова:</strong> @car.Type</p>
+                        <p><strong>Количество дверей:</strong> @car.BodyType</p>
+                        <p><strong>Цвет:</strong> @car.Color</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-warning btn-sm" @onclick="() => NavigateToUpdate(car.CarId)">Update</button>
+                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteCar(car.CarId)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div>
+        <button class="btn btn-primary" @onclick="PrevPage" disabled="@(page == 0)">
+            ← Назад
+        </button>
+        <span style="margin: 0 10px;">Страница @(page + 1)</span>
+        <button class="btn btn-primary" @onclick="NextPage" disabled="@(!HasMorePages)">
+            Вперед →
+        </button>
+    </div>
+@code {
+    private List<Car> cars;
+    private int page = 0;
+    private void PrevPage() => page--;
+    private void NextPage() => page++;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cars = await MsSqlCarsRepository.GetCars();
+    }
+    private bool HasMorePages => cars.Count > (page + 1) * 3;
+
+
+    private void OpenAddCarModal()
+    {
+        Navigation.NavigateTo("/add-cars");
+    }
+
+    private void NavigateToUpdate(int carId)
+    {
+        Navigation.NavigateTo($"/update/{carId}");
+    }
+
+    private async Task DeleteCar(int carId)
+    {
+
+        await MsSqlCarsRepository.DeleteCar(carId);
+
+        cars = await MsSqlCarsRepository.GetCars();
+    }
+}

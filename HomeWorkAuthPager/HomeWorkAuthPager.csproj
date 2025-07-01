@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-HomeWorkAuthPager-c6bd0a46-3bcb-48b4-8e85-3d8fd7551c9b</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.27.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.14" />
+    <PackageReference Include="MudBlazor" Version="8.5.1" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
+    <PackageReference Include="Syncfusion.Blazor.ImageEditor" Version="29.1.39" />
+    <PackageReference Include="Syncfusion.Blazor.Inputs" Version="29.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\image\" />
+  </ItemGroup>
+
+</Project>
